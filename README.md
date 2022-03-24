@@ -43,6 +43,22 @@ pip install pynput
 ```
 To run just execute `pokete.py`.
 
+执行的时候报错
+```shell
+Traceback (most recent call last):
+  File "./pokete/pokete.py", line 1735, in <module>
+    logging.basicConfig(filename=log_file,
+  File "/usr/lib/python3.8/logging/__init__.py", line 2009, in basicConfig
+    raise ValueError('Unrecognised argument(s): %s' % keys)
+ValueError: Unrecognised argument(s): encoding
+```
+需要修改文件`./pokete/pokete.py`,移除`loggin.basicConfig()`中的`encoding='utf-8'`参数
+```py
+ logging.basicConfig(filename=log_file,
+                        format='[%(asctime)s][%(levelname)s]: %(message)s',
+                        level=logging.DEBUG if do_logging else logging.ERROR)
+```
+
 ## Usage
 The game can be run normaly by not supplying any options.
 For non gameplay related usage see `--help`.
